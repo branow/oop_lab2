@@ -1,6 +1,6 @@
-public abstract class Game
-{
-    private static int count;
+public abstract class Game { 
+
+    public static List<Game> history = new List<Game>();
     public int Id { get; }
     public UserAccount[] Gamers { get; }
     public int RatingWinner { get; set; }
@@ -15,8 +15,9 @@ public abstract class Game
         if (rating < 0) throw new ArgumentOutOfRangeException(nameof(rating), "Must be > 0");
         this.RatingWinner = rating;
         this.RatingLoser = rating;
-        Id = count++;
         Type = type;
+        Id = history.Count;
+        history.Add(this);
     }
 
     public abstract void play();
